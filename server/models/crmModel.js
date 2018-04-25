@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // more about mongoose schemas: http://mongoosejs.com/docs/guide.html
 // NOTE: types are not strings
 
-// because we are passing this data as default on 'created_date, 
+// because we are passing current date as default on 'created_date', 
 // we don't need to send the actual date to mongodb: mongo will create it for us on the database
 // we can default any item on the schema by passing a value to the default key 
 let ContactSchema = new Schema({
