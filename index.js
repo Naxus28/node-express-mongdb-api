@@ -9,13 +9,14 @@ const app = express();
 const router = express.Router();
 const PORT = 3000;
 
-// use the database url that corresponds to your environment and host
-// this is the local database url
-// the "connect" function returns a promise, which is useful to handle errors
+// Use the database url that corresponds to your environment and host
+// This is the local database url
+// Mongoose will create the db for us if it doesn't exist
+// The "connect" function returns a promise, which is useful to handle errors
 mongoose.connect('mongodb://localhost/CRMdb')
 .then(
   () => console.log('mongoose connected'),
-  err => console.log(`error on mongoose connection${err}`),
+  err => console.log(`error on mongoose connection ${err}`),
 );
 
 setMiddleware(app);
