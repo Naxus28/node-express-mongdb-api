@@ -1,0 +1,31 @@
+{
+  "name": "node-express-mongdb-api",
+  "version": "1.0.0",
+  "description": "A tutorial on how to build a node-express api with mongodb",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js --exec babel-node -e js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Naxus28/node-express-mongdb-api.git"
+  },
+  "author": "Gabriel Ferraz <gabrielferraz27@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Naxus28/node-express-mongdb-api/issues"
+  },
+  "homepage": "https://github.com/Naxus28/node-express-mongdb-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
