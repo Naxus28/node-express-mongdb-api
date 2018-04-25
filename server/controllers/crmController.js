@@ -67,11 +67,42 @@ const getContact = (req, res) => {
   });
 };
 
+// update contact
+const updateContact = (req, res) => {
+  // findOneAndUpdate takes the id (as key/valu pair), the object to update, 
+  // and another optional object where we can specify we want it to return the new data
+  // not the old
+  Contact.findOneAndUpdate({_id: req.params.id}, req.body, { new: true }, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(contact);
+  });
+};
+
+// delete contact
+const deleteContact = (req, res) => {
+  // findOneAndUpdate takes the id (as key/valu pair), the object to update, 
+  // and another optional object where we can specify we want it to return the new data
+  // not the old
+  Contact.remove({_id: req.params.id}, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(contact);
+  });
+};
+
+
 
 export {
   addContact,
   getContacts,
-  getContact
+  getContact,
+  updateContact,
+  deleteContact
 };
 
 

@@ -1,7 +1,9 @@
 import { 
   addContact, 
   getContacts, 
-  getContact 
+  getContact,
+  updateContact,
+  deleteContact
 } from '../controllers/crmController'
 
 // because we are using the router object
@@ -40,15 +42,19 @@ export default (router) => {
     // })
     
   router.route('/:id') 
-    .get(getContact) // getContact will take the id from the params and retrieve user from db if they exist 
-    .put((req, res) => {
-      console.log(`PUT request for id ${req.params.id} on ${req.baseUrl}`);
-      res.send(`PUT request for id ${req.params.id} on ${req.baseUrl}`);
-    })
-    .delete((req, res) => {
-      console.log(`DELETE request for id ${req.params.id} on ${req.baseUrl}`);
-      res.send(`DELETE request for id ${req.params.id} on ${req.baseUrl}`);
-    });
+    .get(getContact) 
+    .put(updateContact)
+    .delete(deleteContact)
+
+    // use these to test the api without the db stuff
+    // .put((req, res) => {
+    //   console.log(`PUT request for id ${req.params.id} on ${req.baseUrl}`);
+    //   res.send(`PUT request for id ${req.params.id} on ${req.baseUrl}`);
+    // }, updateContact)
+    // .delete((req, res) => {
+    //   console.log(`DELETE request for id ${req.params.id} on ${req.baseUrl}`);
+    //   res.send(`DELETE request for id ${req.params.id} on ${req.baseUrl}`);
+    // });
 
   return router;
 };
