@@ -91,7 +91,7 @@ const deleteContact = (req, res) => {
       res.send(err);
     }
 
-    res.json(contact);
+    res.json({ message: 'User successfully deleted.' });
   });
 };
 
