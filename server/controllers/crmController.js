@@ -1,10 +1,5 @@
 import mongoose from 'mongoose';
-import ContactSchema from '../models/crmModel.js';
-
-// create the Contact collection that will be saved to the DB
-// with the schema that was created in the "model" file
-const Contact = mongoose.model('Contact', ContactSchema);
-
+import Contact from '../models/crmModel.js';
 
 /* the exported function below is the controller that will add the resource to the DB
 * we will import it in the "routes" file and use it in the
@@ -18,7 +13,7 @@ const Contact = mongoose.model('Contact', ContactSchema);
 */
 
 // adds new contact
-const addContact = (req, res) => {
+const addContact = (req, res, next) => {
   // create the new contact
   // express.json and express.urlencode will parse the body sent from the client into json data
   let newContact = new Contact(req.body);  
@@ -28,13 +23,15 @@ const addContact = (req, res) => {
   // back to the callback
   newContact.save((err, contact) => {
     if (err) {
-      // send the error to the client
-      // res.send finishes the connection so we dont need to use "else" below 
-      res.send(err);
+      console.log(err);
+      // the "next" function below throws an error
+      // which is passed to the global error handler 
+      // middleware
+      next(new Error(`${err.name}: ${err._message}`)); // triggers the error middleware
+    } else {
+      // if there are no errors, send the resource just created on the DB back to the client
+      res.json(contact);
     }
-
-    // if there are no errors, send the resource just created on the DB back to the client
-    res.json(contact);
   });
 };
 
@@ -94,7 +91,6 @@ const deleteContact = (req, res) => {
     res.json({ message: 'User successfully deleted.' });
   });
 };
-
 
 
 export {

@@ -1,6 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
+import setMiddleware from './server/middleware/appMiddleware';
+import errorHandlerMiddleware from './server/middleware/errorHandlerMiddleware';
+import contactsRoutes from './server/routes/contactsRoutes';
+
 const app = express();
 const router = express.Router();
 const PORT = 3000;
@@ -14,10 +18,10 @@ mongoose.connect('mongodb://localhost/CRMdb')
   err => console.log(`error on mongoose connection${err}`),
 );
 
-import setMiddleware from './server/middleware/appMiddleware';
-import contactsRoutes from './server/routes/contactsRoutes';
-
 setMiddleware(app);
+
 app.use('/contacts', contactsRoutes(router));
+
+errorHandlerMiddleware(app);
 
 app.listen(PORT, () => console.log('Server listening on http://localhost:3000'));
