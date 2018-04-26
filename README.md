@@ -10,6 +10,31 @@
 
 • babel-cli, babel-preset-env, babel-preset-stage-0
 
+## Package.json script that starts the server
+
+```javascript
+"scripts": {
+    "start": "nodemon ./index.js --exec babel-node -e js"
+  }
+```
+
+This line translates as:
+
+nodemon, start the index file and execute the babel-node binary file from the babel-cli package (check code in \node_modules\babel-cli\bin\babel-node.js)
+
+babel-node, evaluate 'js' files (https://babeljs.io/docs/usage/cli/#babel-node)
+
+Then we add the presets to a .babelrc file in the root of the project like so:
+
+```javascript
+{
+  "presets": [
+    "env",
+    "stage-0"
+  ]
+}
+```
+
 ## Server directory structure
 
 ### Option 1
@@ -280,8 +305,35 @@ const deleteContact = (req, res) => {
     res.json({ message: 'User successfully deleted.' });
   });
 };
-
 ```
+
+## Controllers + routes integration
+
+Once you created your controllers, just pass them into the routes that match the action you want to perform (GET, POST, PUT, DELETE, etc):
+
+```javascript
+// routes/contactsRoutes.js
+import { 
+  addContact, 
+  getContacts, 
+  getContact,
+  updateContact,
+  deleteContact
+} from '../controllers/crmController'
+
+export default (router) => {
+  router.route('/')
+    .get(getContacts)  
+    .post(addContact) 
+  router.route('/:id') 
+    .get(getContact) 
+    .put(updateContact)
+    .delete(deleteContact)
+
+  return router;
+};
+```
+
 
 
 ## Test with Postman
