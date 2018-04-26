@@ -27,11 +27,11 @@ const addContact = (req, res, next) => {
       // the "next" function below throws an error
       // which is passed to the global error handler 
       // middleware
-      next(new Error(`${err.name}: ${err._message}`)); // triggers the error middleware
-    } else {
-      // if there are no errors, send the resource just created on the DB back to the client
-      res.json(contact);
-    }
+      return next(new Error(`${err.name}: ${err._message}`)); // triggers the error middleware
+    } 
+
+    // if there are no errors, send the resource just created on the DB back to the client
+    res.json(contact);
   });
 };
 

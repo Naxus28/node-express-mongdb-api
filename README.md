@@ -174,6 +174,116 @@ You can see the databases you created and their content like so:
 ![dbs](img/dbs.png)
 
 
+
+## Mongoose Schema (data model)
+Mongoose is all about creating schemas for your databases. In mongoose, a schema is an object of objects. Each key in the inner object is the property to be saved to the DB. Inner objects have a mandatory "type" key, which specifies the property's data type.
+[Check docs for a list of possible types as well as other key/pair values you can pass to your schema](http://mongoosejs.com/docs/schematypes.html)
+
+
+e.g.
+
+```javascript
+// models/crmModel.js'
+
+let ContactSchema = new Schema({
+  firstName: {
+    type: String,
+    required: 'First name is required' // message returned if firstName is not sent
+  },
+  lastName: {
+    type: String,
+    required: 'Last name is required'
+  },
+  email: {
+    type: String
+  },
+  company: {
+    type: String
+  },
+  phone: {
+    type: Number
+  },
+  created_date: {
+    type: Date,
+    default: Date.now 
+  }
+});
+
+export default mongoose.model('Contact', ContactSchema);
+```
+
+## Mongoose controllers
+Controllers controll the flow of data on your server. With mongoose, controllers are normally going to save data passed from the client to the api, throw errors if data is not valid, and call the next middleware so the server continues its flow to the end.
+
+[For list of middleware and db methods, check "Schemas" in the documentation](http://mongoosejs.com/docs/)
+
+e.g. 
+
+
+```javascript
+// models/crmController.js'
+
+import Contact from '../models/crmModel.js';
+
+// adds contact
+const addContact = (req, res, next) => {
+  let newContact = new Contact(req.body);  
+  newContact.save((err, contact) => {
+    if (err) {
+      return next(new Error(`${err.name}: ${err._message}`)); // triggers the error middleware
+    }
+    
+    res.json(contact);
+  });
+};
+
+// gets all contacts
+const getContacts = (req, res) => {
+  Contact.find({}, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(contact);
+  });
+};
+
+// gets contact by id 
+const getContact = (req, res) => {
+  Contact.findById(req.params.id, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(contact);
+  });
+};
+
+// update contact
+const updateContact = (req, res) => {
+  Contact.findOneAndUpdate({_id: req.params.id}, req.body, { new: true }, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(contact);
+  });
+};
+
+// delete contact
+const deleteContact = (req, res) => {
+  Contact.remove({_id: req.params.id}, (err, contact) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json({ message: 'User successfully deleted.' });
+  });
+};
+
+```
+
+
 ## Test with Postman
 
 For post requests use x-www-form-urlencoded:
