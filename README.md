@@ -179,6 +179,9 @@ You should see something like this on your terminal:
 Mongo listens for connections on port 27017.
 
 
+>Create the database using robomongo (see below).
+
+
 ## Mongoose
 
 Mongoose allows us to set a schema for each collection and define what each key/value pair in the item (object) takes as a type
@@ -197,6 +200,20 @@ You can see the databases you created and their content like so:
 
 
 ![dbs](img/dbs.png)
+
+
+### Create connection on server entry point file
+
+```javascript
+// index.js
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb://localhost/<DBName>')
+.then(
+  () => console.log('mongoose connected'),
+  err => console.log(`error on mongoose connection ${err}`),
+);
+```
 
 
 
