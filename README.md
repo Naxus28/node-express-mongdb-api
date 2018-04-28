@@ -85,10 +85,6 @@ router.use('/categories', require('./anotherTopic/anotherTopic.route'));
 exports default router;
 ```
 
-&nbsp;&nbsp;/models
-
-&nbsp;&nbsp;/routes
-
 &nbsp;&nbsp;/middleware
 
 
