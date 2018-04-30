@@ -175,6 +175,14 @@ You should see something like this on your terminal:
 Mongo listens for connections on port 27017.
 
 
+
+## Mongo shell
+
+`mongo` opens the mongo shell, where you can interact with databases
+
+[Check out some useful shell commands](https://docs.mongodb.com/manual/reference/mongo-shell/?utm_source=google&utm_campaign=Americas_US_DSA_NB_FM&utm_keyword=&utm_device=c&utm_network=g&utm_medium=cpc&utm_creative=253505288526&utm_matchtype=b&_bt=253505288526&_bk=&_bm=b&_bn=g&jmp=search&gclid=Cj0KCQjw_ZrXBRDXARIsAA8KauT_wMrig9GSGY9aiklrbsCo5Wcwx73ypxa7_YDKO39WTbzrkBnBpswaAuLSEALw_wcB#mongo-shell-command-history)
+
+
 >Create the database using robomongo (see below).
 
 
