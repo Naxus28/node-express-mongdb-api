@@ -356,6 +356,10 @@ export default (router) => {
 ```
 
 
+## Test with httpie
+
+This program allows you to perform http requests from the terminal window. [Check the repo](https://github.com/jakubroztocil/httpie)
+
 
 ## Test with Postman
 
