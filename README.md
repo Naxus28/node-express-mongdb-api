@@ -98,7 +98,7 @@ const app = express();
 const router = express.Router();
 
 import someRoute from './server/routes/someRoute';
-app.use('/routePath', contactsRoutes(router));
+app.use('/routePath', someRoute(router));
 ```
 
 ```javascript
