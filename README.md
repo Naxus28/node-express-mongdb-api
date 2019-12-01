@@ -161,7 +161,8 @@ This is the directory where mongodb stores your data.
 
 Make sure you have read and write permission on that directory otherwise the command below will not work. If you don't have permissions, set them using these commands:
 
-`sudo chmod 0755 /data/db sudo chown $USER /data/db`
+`sudo chmod 0755 /data/db`
+`sudo chown $USER /data/db`
 
 __run mongodb__
 
